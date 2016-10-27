@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Polymer.deepClone Demo</title>
+        <link rel="import" href="./bower_components/polymer/polymer.html" />
+        <link rel="import" href="../lexm-deep-clone.html" />
+        <script>
+            Polymer({
+                is: 'a-custom-element',
+                properties: {
+                    title: String
+                },
+                
+                ready: function() {
+                    this.title = "This is a custom element";
+                }
+            });
+            
+            Polymer({
+                is: 'a-custom-child-element',
+                properties: {
+                    title: String
+                },
+                
+                ready: function() {
+                    this.innerHTML = 'test';
+                    this.title = 'test child';
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <a-custom-element id="myElement">
+            <span>This should be skipped</span>
+            <div>this should be converted to a P tag</div>
+            <a-custom-child-element></a-custom-child-element>
+        </a-custom-element>
+        
+        <script>
+            var myElem = document.getElementById('myElement');
+            
+            // clone whit filter
+            var clonedElem = Polymer.deepClone(myElem, {
+                filter: function(node) {
+                    return node.tagName == 'SPAN';
+                }
+            }).node();
+            clonedElem.id = clonedElem.id + '_clone1';
+            document.body.appendChild(clonedElem);
+            
+            var clonedElem = Polymer.deepClone(myElem, {
+                map:function(node) {
+                    if(node.tagName == 'DIV') {
+                        var pTag = document.createElement('p');
+                        pTag.innerHTML = node.innerHTML;
+                        return pTag;
+                    }
+                    
+                    return node;
+                }
+            }).node();
+            clonedElem.id = clonedElem.id + '_clone2';
+            document.body.appendChild(clonedElem);
+            
+             var clonedElem = Polymer.deepClone(myElem, {
+                map:function(node) {
+                    if(node.tagName == 'DIV') {
+                        var pTag = document.createElement('p');
+                        pTag.innerHTML = node.innerHTML;
+                        return pTag;
+                    }
+                    
+                    return node;
+                },
+                
+                filter: function(node) {
+                    return node.tagName == 'SPAN';
+                }
+            }).node();
+            clonedElem.id = clonedElem.id + '_clone3';
+            document.body.appendChild(clonedElem);
+        </script>
+    </body>
+</html>
