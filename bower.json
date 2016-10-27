@@ -1,0 +1,23 @@
+{
+  "name": "lexm-deep-clone",
+  "description": "A polymer tool for cloning custom elements with their properties. I will also clone child custom elements and their properties.",
+  "main": "lexm-deep-clone.html",
+  "authors": [
+    "Alexander Mihaylov <lex.mihaylov@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "polymer",
+    "browser",
+    "webcomponent",
+    "clone"
+  ],
+  "homepage": "https://github.com/lexmihaylov/lexm-deep-clone",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

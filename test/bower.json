@@ -1,0 +1,23 @@
+{
+  "name": "lexm-deep-clone-test",
+  "homepage": "https://github.com/lexmihaylov/lexm-deep-clone",
+  "authors": [
+    "Alexander Mihaylov <lex.mihaylov@gmail.com>"
+  ],
+  "description": "tests for lexm-deep-clone",
+  "main": "test.html",
+  "keywords": [
+    "tests"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "polymer": "^1.7.0"
+  }
+}

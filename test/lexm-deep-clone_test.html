@@ -1,0 +1,84 @@
+<link rel="import" href="bower_components/polymer/polymer.html" />
+<link rel="import" href="../lexm-deep-clone.html">
+
+<dom-module id="lexm-deep-clone_test">
+    <template>
+        <a-custom-element id="myElement">
+            <span class="test test-1">text 1</span>
+            <span class="test test-2">text 1</span>
+            <span class="test test-3">text 1</span>
+        </a-custom-element>
+    </template>
+    
+    <script>
+        QUnit.config.autostart = false;
+        
+        Polymer({
+           is: 'lexm-deep-clone_test',
+           hostAttributes: {
+               hidden: true
+           },
+           
+           ready: function() {
+               this.tests();
+               QUnit.start();
+           },
+           
+           tests: function() {
+               QUnit.test('Polymer.deepClone(el).node()', function(assert) {
+                   var clonedNode = Polymer.deepClone(this.$.myElement).node();
+                   assert.ok(
+                       clonedNode.outerHTML == this.$.myElement.outerHTML, 
+                       "outerHTML should match the original element"
+                   );
+               }.bind(this));
+               
+               QUnit.test('Polymer.deepClone(el).childNodesTo(destElem)', function(assert) {
+                   var divElem = document.createElement('div');
+                   Polymer.deepClone(this.$.myElement).childNodesTo(divElem);
+                   assert.ok(
+                       divElem.innerHTML == this.$.myElement.innerHTML, 
+                       "innerHTML should match the original element"
+                   );
+               }.bind(this));
+               
+               QUnit.test('Polymer.deepClone(el, opt.filter).childNodesTo(destElem)', function(assert) {
+                   var divElem = document.createElement('div');
+                   Polymer.deepClone(this.$.myElement, {
+                       filter: function(node) {
+                          return node.nodeType !== 3 && !node.classList.contains('test-1');
+                       }
+                   }).childNodesTo(divElem);
+                   
+                   assert.ok(
+                       divElem.querySelectorAll('.test').length === 1 &&
+                        divElem.querySelectorAll('.test')[0].classList.contains('test-1'),
+                       "filter should leave only one specific element from the childlist"
+                   );
+               }.bind(this));
+               
+               QUnit.test('Polymer.deepClone(el, opt.map).childNodesTo(destElem)', function(assert) {
+                   var divElem = document.createElement('div');
+                   Polymer.deepClone(this.$.myElement, {
+                       map: function(node) {
+                           if(node.nodeType !== 3 && node.classList.contains('test-3')) {
+                               var newNode = document.createElement('p');
+                               newNode.setAttribute('class', 'test test-3');
+                               
+                               return newNode
+                           }
+                           
+                          return node;
+                       }
+                   }).childNodesTo(divElem);
+                   
+                   assert.ok(
+                       divElem.querySelectorAll('.test-3').length === 1 &&
+                        divElem.querySelectorAll('.test-3')[0].tagName === 'P',
+                       "filter should leave only one specific element from the childlist"
+                   );
+               }.bind(this));
+           }
+        });
+    </script>
+</dom-module>

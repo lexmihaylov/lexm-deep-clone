@@ -1,0 +1,30 @@
+{
+  "name": "lexm-deep-clone",
+  "version": "1.0.0",
+  "description": "<dl> <dt><a href=\"#module_deepClone\">deepClone</a> ⇒ <code><a href=\"#DeepClone\">DeepClone</a></code></dt> <dd><p>lexm-deep-clone is a Polymer helper that helps you clone a custom element, it&#39;s child nodes and custom element attributes. Also it provides a simple node filternig and mapping.</p> </dd> </dl>",
+  "main": "lexm-deep-clone.html",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-qunit": "^1.5.0",
+    "gulp-shell": "^0.5.2",
+    "jsdoc-to-markdown": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lexmihaylov/lexm-deep-clone.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lexmihaylov/lexm-deep-clone/issues"
+  },
+  "homepage": "https://github.com/lexmihaylov/lexm-deep-clone#readme"
+}
